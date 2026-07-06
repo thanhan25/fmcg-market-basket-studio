@@ -4,9 +4,7 @@
 
 An enterprise-grade Market Basket Analysis engine designed for FMCG Category Managers and E-commerce Recommendation Systems.
 
-
-![Dashboard](assets/dashboard.png)
-
+![Dashboard Preview](assets/dashboard.PNG)
 
 Unlike traditional data science repositories that stop at calculating "Lift", this studio calculates **Expected Commercial Value (ECV)**—allowing merchandisers to immediately identify the most profitable cross-selling bundles.
 
