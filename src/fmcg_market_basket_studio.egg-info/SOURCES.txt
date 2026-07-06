@@ -1,0 +1,15 @@
+README.md
+pyproject.toml
+src/fmcg_basket/__init__.py
+src/fmcg_basket/engine.py
+src/fmcg_basket/metrics.py
+src/fmcg_basket/visualization.py
+src/fmcg_basket/backends/bigquery_client.py
+src/fmcg_basket/backends/local_duckdb.py
+src/fmcg_market_basket_studio.egg-info/PKG-INFO
+src/fmcg_market_basket_studio.egg-info/SOURCES.txt
+src/fmcg_market_basket_studio.egg-info/dependency_links.txt
+src/fmcg_market_basket_studio.egg-info/requires.txt
+src/fmcg_market_basket_studio.egg-info/top_level.txt
+tests/test_api.py
+tests/test_engine.py

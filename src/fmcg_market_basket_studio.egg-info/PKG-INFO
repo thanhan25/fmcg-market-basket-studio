@@ -1,0 +1,51 @@
+Metadata-Version: 2.4
+Name: fmcg-market-basket-studio
+Version: 0.1.0
+Summary: Enterprise market basket analysis for FMCG cross-selling and Expected Commercial Value (ECV) optimization.
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: pandas>=2.0.0
+Requires-Dist: mlxtend>=0.23.0
+Requires-Dist: polars>=0.19.0
+Requires-Dist: duckdb>=0.8.0
+Provides-Extra: api
+Requires-Dist: fastapi>=0.100.0; extra == "api"
+Requires-Dist: uvicorn>=0.22.0; extra == "api"
+Requires-Dist: pydantic>=2.0.0; extra == "api"
+Provides-Extra: ui
+Requires-Dist: streamlit>=1.25.0; extra == "ui"
+Requires-Dist: networkx>=3.1; extra == "ui"
+Requires-Dist: matplotlib>=3.7.0; extra == "ui"
+Provides-Extra: cloud
+Requires-Dist: google-cloud-bigquery>=3.0.0; extra == "cloud"
+Requires-Dist: db-dtypes>=1.0.0; extra == "cloud"
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0.0; extra == "dev"
+Requires-Dist: ruff>=0.0.285; extra == "dev"
+Requires-Dist: pre-commit>=3.3.0; extra == "dev"
+Requires-Dist: ipykernel>=6.25.0; extra == "dev"
+Requires-Dist: httpx>=0.24.0; extra == "dev"
+
+﻿# 🛒 FMCG Market Basket Studio
+
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+
+An enterprise-grade Market Basket Analysis engine designed for FMCG Category Managers and E-commerce Recommendation Systems.
+
+![Dashboard Preview](assets/dashboard.PNG)
+
+Unlike traditional data science repositories that stop at calculating "Lift", this studio calculates **Expected Commercial Value (ECV)**—allowing merchandisers to immediately identify the most profitable cross-selling bundles.
+
+## Architecture
+
+1. **Core Engine:** Polars/Pandas & MLxtend (Apriori Algorithm)
+2. **BI Dashboard:** Streamlit UI for Category Managers (Network Graphs & ECV Tables)
+3. **E-Commerce Integration:** FastAPI endpoint for real-time "Frequently Bought Together" recommendations.
+
+## Quickstart
+
+```bash
+pip install -r requirements.txt
+python src/fmcg_basket/engine.py
+streamlit run app/dashboard.py
+```

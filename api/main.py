@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Query
 from pydantic import BaseModel
 import pandas as pd
 from typing import List
@@ -9,8 +9,11 @@ app = FastAPI(
     version="1.0.0"
 )
 
+# Load engine data globally
 try:
     rules_df = pd.read_csv("data/processed/association_rules.csv")
+    # Normalize products for robust querying
+    rules_df['antecedents'] = rules_df['antecedents'].str.strip().str.lower()
 except FileNotFoundError:
     rules_df = pd.DataFrame()
 
@@ -29,14 +32,25 @@ def health_check():
     return {"status": "operational", "rules_loaded": not rules_df.empty}
 
 @app.get("/recommend/{product}", response_model=RecommendationResponse)
-def get_recommendations(product: str, top_n: int = 3):
+def get_recommendations(
+    product: str,
+    top_n: int = Query(3, ge=1, le=10),
+    min_lift: float = Query(1.0, ge=1.0),
+    min_confidence: float = Query(0.1, ge=0.0)
+):
+    """Fetch 'Frequently Bought Together' items for a given anchor product."""
     if rules_df.empty:
-        raise HTTPException(status_code=503, detail="Rules engine not initialized. Run the pipeline first.")
+        raise HTTPException(status_code=503, detail="Rules engine not initialized. Run pipeline first.")
 
-    recommendations = rules_df[rules_df['antecedents'].str.lower() == product.lower()]
+    product_clean = product.strip().lower()
+    recommendations = rules_df[
+        (rules_df['antecedents'] == product_clean) &
+        (rules_df['lift'] >= min_lift) &
+        (rules_df['confidence'] >= min_confidence)
+    ]
 
     if recommendations.empty:
-        return RecommendationResponse(anchor=product, recommendations=[])
+        return RecommendationResponse(anchor=product_clean, recommendations=[])
 
     top_recs = recommendations.sort_values('Expected_Value_Per_1k_EUR', ascending=False).head(top_n)
 
@@ -50,4 +64,4 @@ def get_recommendations(product: str, top_n: int = 3):
         for _, row in top_recs.iterrows()
     ]
 
-    return RecommendationResponse(anchor=product, recommendations=results)
+    return RecommendationResponse(anchor=product_clean, recommendations=results)

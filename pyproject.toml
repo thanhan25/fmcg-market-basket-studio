@@ -1,24 +1,33 @@
 [project]
 name = "fmcg-market-basket-studio"
 version = "0.1.0"
-description = "Enterprise market basket analysis for FMCG cross-selling."
+description = "Enterprise market basket analysis for FMCG cross-selling and Expected Commercial Value (ECV) optimization."
+readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     "pandas>=2.0.0",
     "mlxtend>=0.23.0",
-    "fastapi>=0.100.0",
-    "uvicorn>=0.22.0",
-    "streamlit>=1.25.0",
-    "networkx>=3.1",
-    "matplotlib>=3.7.0",
-    "duckdb>=1.5.4",
+    "polars>=0.19.0",
+    "duckdb>=0.8.0",
 ]
 
-[dependency-groups]
-dev = [
-    "ipykernel>=7.3.0",
-    "pre-commit>=4.6.0",
-]
+[project.optional-dependencies]
+api = ["fastapi>=0.100.0", "uvicorn>=0.22.0", "pydantic>=2.0.0"]
+ui = ["streamlit>=1.25.0", "networkx>=3.1", "matplotlib>=3.7.0"]
+cloud = ["google-cloud-bigquery>=3.0.0", "db-dtypes>=1.0.0"]
+dev = ["pytest>=7.0.0", "ruff>=0.0.285", "pre-commit>=3.3.0", "ipykernel>=6.25.0", "httpx>=0.24.0"]
+
 
 [tool.ruff]
 line-length = 120
+
+[tool.uv]
+package = true
+
+[tool.pytest.ini_options]
+pythonpath = [
+  ".", "src"
+]
+filterwarnings = [
+    "ignore::DeprecationWarning:fastapi.*"
+]
