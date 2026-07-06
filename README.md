@@ -1,9 +1,9 @@
-﻿
-# 🛒 FMCG Market Basket Studio
+﻿# 🛒 FMCG Market Basket Studio
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 
 An enterprise-grade Market Basket Analysis engine designed for FMCG Category Managers and E-commerce Recommendation Systems.
+![Dashboard](assets/dashboard.png)
 
 Unlike traditional data science repositories that stop at calculating "Lift", this studio calculates **Expected Commercial Value (ECV)**—allowing merchandisers to immediately identify the most profitable cross-selling bundles.
 
