@@ -1,4 +1,4 @@
-﻿[project]
+[project]
 name = "fmcg-market-basket-studio"
 version = "0.1.0"
 description = "Enterprise market basket analysis for FMCG cross-selling."
@@ -11,4 +11,14 @@ dependencies = [
     "streamlit>=1.25.0",
     "networkx>=3.1",
     "matplotlib>=3.7.0",
+    "duckdb>=1.5.4",
 ]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=7.3.0",
+    "pre-commit>=4.6.0",
+]
+
+[tool.ruff]
+line-length = 120
