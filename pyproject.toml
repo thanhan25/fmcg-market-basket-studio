@@ -1,0 +1,14 @@
+﻿[project]
+name = "fmcg-market-basket-studio"
+version = "0.1.0"
+description = "Enterprise market basket analysis for FMCG cross-selling."
+requires-python = ">=3.10"
+dependencies = [
+    "pandas>=2.0.0",
+    "mlxtend>=0.23.0",
+    "fastapi>=0.100.0",
+    "uvicorn>=0.22.0",
+    "streamlit>=1.25.0",
+    "networkx>=3.1",
+    "matplotlib>=3.7.0",
+]
