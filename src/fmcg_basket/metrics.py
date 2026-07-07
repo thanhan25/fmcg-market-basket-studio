@@ -5,10 +5,11 @@ def calculate_expected_commercial_value(rules: pd.DataFrame, margins: dict, volu
     Calculates Expected Commercial Value (ECV) for association rules.
     ECV = Confidence * Margin of Consequent * Baseline Volume
     """
-    # Map margins; default to 1.0 if not found in dictionary to prevent NaN
-    consequent_margins = rules["consequents"].map(margins).fillna(1.0)
+    # 1. Map margins to a new column so the API and Dashboard can reference it if needed
+    rules["Consequent_Margin_EUR"] = rules["consequents"].map(margins).fillna(1.0)
 
+    # 2. Calculate the final ECV metric
     rules["Expected_Value_Per_1k_EUR"] = (
-        rules["confidence"] * consequent_margins * (volume / 1000)
+        rules["confidence"] * rules["Consequent_Margin_EUR"] * volume
     )
     return rules
