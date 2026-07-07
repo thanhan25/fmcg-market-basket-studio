@@ -60,6 +60,7 @@ if not rules.empty:
             f"€{filtered_rules['Expected_Value_Per_1k_EUR'].max():.2f}" if not filtered_rules.empty else "€0",
             help="Expected Commercial Value: Confidence * Consequent Margin * 1,000"
         )
+        st.caption("*ECV = estimated gross margin uplift per 1,000 baskets if this bundle is promoted.*")
         col3.metric(
             "Highest Lift Bundle",
             f"{filtered_rules['lift'].max():.2f}x" if not filtered_rules.empty else "0x",

@@ -42,15 +42,19 @@ def get_recommendations(
     if rules_df.empty:
         raise HTTPException(status_code=503, detail="Rules engine not initialized. Run pipeline first.")
 
-    product_clean = product.strip().lower()
+    # Normalize query to lowercase for matching
+    product_query = product.strip().lower()
+
+    # Ensure dataframe antecedents are lowercase for the comparison, but keep original for response
+    mask = rules_df['antecedents'].str.lower() == product_query
     recommendations = rules_df[
-        (rules_df['antecedents'] == product_clean) &
+        mask &
         (rules_df['lift'] >= min_lift) &
         (rules_df['confidence'] >= min_confidence)
     ]
 
     if recommendations.empty:
-        return RecommendationResponse(anchor=product_clean, recommendations=[])
+        return RecommendationResponse(anchor=product.title(), recommendations=[])
 
     top_recs = recommendations.sort_values('Expected_Value_Per_1k_EUR', ascending=False).head(top_n)
 
@@ -64,4 +68,4 @@ def get_recommendations(
         for _, row in top_recs.iterrows()
     ]
 
-    return RecommendationResponse(anchor=product_clean, recommendations=results)
+    return RecommendationResponse(anchor=product.title(), recommendations=results)
