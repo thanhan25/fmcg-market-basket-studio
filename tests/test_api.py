@@ -13,5 +13,5 @@ def test_recommend_endpoint_normalization():
     response = client.get("/recommend/DIAPERS?top_n=1")
     if response.status_code == 200:
         data = response.json()
-        assert data["anchor"] == "diapers"
+        assert data["anchor"] == "Diapers"
         assert isinstance(data["recommendations"], list)

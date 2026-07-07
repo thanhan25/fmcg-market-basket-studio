@@ -13,7 +13,7 @@ def test_ecv_calculation():
     mock_margins = {'Beer': 2.00}
 
     # Calculate ECV
-    result = calculate_expected_commercial_value(mock_rules, mock_margins, basket_volume=1000)
+    result = calculate_expected_commercial_value(mock_rules, mock_margins, volume=1000)
 
     # ECV = Confidence (0.5) * Margin (2.00) * Volume (1000) = 1000.00
     expected_value = 1000.00
