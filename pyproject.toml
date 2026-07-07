@@ -31,3 +31,7 @@ pythonpath = [
 filterwarnings = [
     "ignore::DeprecationWarning:fastapi.*"
 ]
+
+[tool.ruff.per-file-ignores]
+"app/dashboard.py" = ["E402"]
+"make_docs.py" = ["E501"]

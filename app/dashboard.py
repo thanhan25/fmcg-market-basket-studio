@@ -1,5 +1,12 @@
+import sys
+from pathlib import Path
 import streamlit as st
 import pandas as pd
+
+# Dynamically append the project root to the system path
+sys.path.append(str(Path(__file__).resolve().parent.parent))
+
+# The local import must come after the sys.path modification
 from src.fmcg_basket.visualization import plot_affinity_network
 
 st.set_page_config(page_title="FMCG Market Basket Studio", layout="wide", page_icon="🛒")
